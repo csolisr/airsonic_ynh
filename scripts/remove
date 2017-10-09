@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Exit on command errors and treat unset variables as an error
+set -u
+
+# Retrieve app settings
+domain=$(ynh_app_setting_get "$app" domain)
+
+sudo rm /etc/nginx/conf.d/$domain.d/airsonic.conf
+sudo rm /etc/default/airsonic
+
+sudo service tomcat8 stop
+sudo rm /var/lib/tomcat8/webapps/airsonic.war
+sudo rm -r /var/airsonic/
+sudo service tomcat8 start
+
+sudo service nginx reload
+sudo yunohost app ssowatconf 

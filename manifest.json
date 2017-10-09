@@ -1,0 +1,58 @@
+{
+    "name": "Airsonic",
+    "id": "airsonic",
+    "packaging_format": 1,
+    "description": {
+        "en": "Airsonic is an open source, web-based media server.",
+        "fr": "Airsonic est un server multimedia open-source"
+    },
+    "license": "GPLv3.0",
+    "url": "http://airsonic.github.io",
+    "developer": {
+        "name": "Airsonic developers",
+        "url": "https://airsonic.github.io"
+    },
+    "maintainer": {
+        "name": "Carlos Solís",
+        "email": "csolisr@azkware.net"
+    },
+    "requirements": {
+        "yunohost": ">> 2.4.0"
+    },
+    "multi_instance": true,
+    "services": [
+        "nginx"
+    ],
+    "arguments": {
+        "install" : [
+            {
+                "name": "domain",
+                "type": "domain",
+                "ask": {
+                    "en": "Choose a domain for Airsonic",
+                    "fr": "Choisissez un nom de domaine pour Airsonic"
+                },
+                "example": "domain.org"
+            },
+            {
+                "name": "path",
+                "type": "path",
+                "ask": {
+                    "en": "Choose a path for Airsonic",
+                    "fr": "Choisissez un chemin pour Airsonic"
+                },
+                "example": "/airsonic",
+                "default": "/airsonic"
+            },
+            {
+                "name": "admin",
+                "type": "user",
+                "ask": {
+                    "en": "Choose the Airsonic administrator (must be an existing YunoHost user)",
+                    "fr": "Choisissez l’administrateur"
+                },
+                "example": "homer"
+            }
+        ]
+    }
+}

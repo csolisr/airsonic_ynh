@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Exit on command errors and treat unset variables as an error
+set -eu
+
+sudo service tomcat8 stop
+
+appversion=$(cat upstream_version)
+echo "Downloading airsonic $appversion..."
+final_path="/var/lib/tomcat8/webapps/"
+sudo wget https://github.com/airsonic/airsonic/releases/download/v$appversion/airsonic.war -O ${final_path}airsonic.war
+
+sudo chown -R tomcat8:tomcat8 /var/lib/tomcat8/webapps/
+sudo service tomcat8 start
