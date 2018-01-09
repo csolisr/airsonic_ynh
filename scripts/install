@@ -21,7 +21,7 @@ path_url=$YNH_APP_ARG_PATH
 user=$YNH_APP_ARG_ADMIN
 
 #=================================================
-# CHECK THE DEBIAN'S CODENAME
+# CHECK DEBIAN CODENAME
 #=================================================
 
 codename=$(lsb_release -a 2>/dev/null | grep Codename | cut -f 2)
@@ -61,7 +61,7 @@ sudo cp -a ../conf/backports.list /etc/apt/sources.list.d/
 sudo apt-get update
 sudo apt-get -t $codename-backports -y install openjdk-8-jre-headless ca-certificates-java
 # Install then main dependencies
-sudo apt-get install -y tomcat8 lame flac faad vorbis-tools xsltproc
+sudo apt-get install -y tomcat8 lame flac faad vorbis-tools xsltproc ffmpeg
 
 # airsonic version in upstream_version file
 appversion=$(cat upstream_version)
@@ -71,6 +71,7 @@ final_path="/var/lib/tomcat8/webapps/"
 echo "Extracting to $final_path..."
 # Get airsonic war file
 sudo wget https://github.com/airsonic/airsonic/releases/download/v$appversion/airsonic.war -q -O ${final_path}airsonic.war
+#sudo wget https://airsonic.org/release/airsonic-v$appversion.war -q -O ${final_path}airsonic.war
 
 # Create needed directories and link binaries
 sudo mkdir /var/airsonic
@@ -101,22 +102,34 @@ sudo sh -c "echo 'LdapEnabled=true' >> /var/airsonic/airsonic.properties"
 sudo sh -c "echo 'LdapUrl=ldap\://localhost\:389/ou\=users,dc\=yunohost,dc\=org' >> /var/airsonic/airsonic.properties"
 sudo sh -c "echo 'LdapSearchFilter=(&(objectClass\=mailAccount)(uid\={0}))' >> /var/airsonic/airsonic.properties"
 
+sudo chown tomcat8:tomcat8 /var/airsonic/airsonic.properties
+
 data_path=/home/yunohost.app/airsonic
 
-VERSION="1.10.2"
+#VERSION="10.1.1"
 
 wget "http://localhost:8080/airsonic/rest/createUser.view?u=admin&p=admin&adminRole=Yes&username=$user&password=a&email=$YNH_MAIL&ldapAuthenticated=Yes&v=$VERSION&c=myapp" > /dev/null 2>&1
 
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&adminRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&settingsRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&streamRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&jukebowRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&downloadRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&uploadRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&covertArtRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&commentRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&podcastArtRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&shareArtRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
+#wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&adminRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&adminRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+#wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&settingsRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&settingsRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+#wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&streamRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&streamRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+#wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&jukebowRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&jukebowRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+#wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&downloadRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&downloadRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+#wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&uploadRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&uploadRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+#wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&covertArtRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&covertArtRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+#wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&commentRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&commentRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+#wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&podcastArtRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&podcastArtRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+#wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&shareArtRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&shareArtRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
 
 
 # Reload Nginx and regenerate SSOwat conf

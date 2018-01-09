@@ -8,9 +8,14 @@
     },
     "license": "GPLv3.0",
     "url": "http://airsonic.github.io",
-    "developer": {
-        "name": "Airsonic developers",
-        "url": "https://airsonic.github.io"
+    "developper": {
+        "name": "Eugene E. Kashpureff Jr",
+        "email": "eugene@kashpureff.org",
+        "url": "https://eugenekay.com"
+    },
+    "maintainer": {
+        "name": "massyas",
+        "email": "massyas@gmail.com"
     },
     "maintainer": {
         "name": "Carlos Solís",

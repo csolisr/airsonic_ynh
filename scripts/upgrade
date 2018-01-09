@@ -9,6 +9,7 @@ appversion=$(cat upstream_version)
 echo "Downloading airsonic $appversion..."
 final_path="/var/lib/tomcat8/webapps/"
 sudo wget https://github.com/airsonic/airsonic/releases/download/v$appversion/airsonic.war -O ${final_path}airsonic.war
+#sudo wget https://airsonic.org/release/airsonic-v$appversion.war -O ${final_path}airsonic.war
 
 sudo chown -R tomcat8:tomcat8 /var/lib/tomcat8/webapps/
 sudo service tomcat8 start

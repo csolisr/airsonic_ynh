@@ -1,12 +1,6 @@
 airsonic_ynh
 ============
-Package AirSonic for Yunohost
-Based on the LibreSonic package at [https://github.com/YunoHost-Apps/libresonic_ynh/](https://github.com/YunoHost-Apps/libresonic_ynh/).
-Original packager's notes included below.
 
-------------
+Airsonic package for Yunohost, based on the package for Libresonic.
 
-Install & remove is OK.
-Dependency openjdk-8 is installed from debian backports.
-
-Backup seems OK but restore is KO.
+Installation is currently not working.
