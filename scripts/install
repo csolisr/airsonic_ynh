@@ -105,8 +105,8 @@ sudo sh -c "echo 'LdapSearchFilter=(&(objectClass\=mailAccount)(uid\={0}))' >> /
 sudo chown tomcat8:tomcat8 /var/airsonic/airsonic.properties
 
 data_path=/home/yunohost.app/airsonic
-
-VERSION="10.1.1"
+# VERSION seems to be rest api version
+VERSION="1.15.0"
 
 wget "http://localhost:8080/airsonic/rest/createUser.view?u=admin&p=admin&adminRole=Yes&username=$user&password=a&email=$YNH_MAIL&ldapAuthenticated=Yes&v=$VERSION&c=myapp" > /dev/null 2>&1
 
