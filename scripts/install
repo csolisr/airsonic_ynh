@@ -68,6 +68,8 @@ appversion=$(cat upstream_version)
 echo "Downloading airsonic $appversion..."
 mkdir -p ../airsonic
 final_path="/var/lib/tomcat8/webapps/"
+# Stop tomcat if already running
+sudo service tomcat8 stop
 echo "Extracting to $final_path..."
 # Get airsonic war file
 sudo wget https://github.com/airsonic/airsonic/releases/download/v$appversion/airsonic.war -q -O ${final_path}airsonic.war
@@ -81,8 +83,11 @@ sudo ln -s /usr/bin/ffmpeg /var/airsonic/transcode
 
 sudo chown tomcat8:tomcat8 -R /var/airsonic
 
-# Restart tomcat to deploy war
-sudo service tomcat8 restart
+# Start tomcat to deploy war
+sudo service tomcat8 start
+
+echo "Waiting for 30s for jar deployment..."
+sleep 30
 
 # Set nginx reverse proxy
 #if [[ "$path" == "/" ]] ; then
@@ -109,7 +114,6 @@ data_path=/home/yunohost.app/airsonic
 VERSION="1.15.0"
 
 wget "http://localhost:8080/airsonic/rest/createUser.view?u=admin&p=admin&adminRole=Yes&username=$user&password=a&email=$YNH_MAIL&ldapAuthenticated=Yes&v=$VERSION&c=myapp" > /dev/null 2>&1
-
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&adminRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
 wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&adminRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&settingsRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
