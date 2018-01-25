@@ -114,7 +114,7 @@ sudo chown tomcat8:tomcat8 /var/airsonic/airsonic.properties
 data_path=/home/yunohost.app/airsonic
 # VERSION seems to be rest api version
 VERSION="1.15.0"
-rest_log = /tmp/rest.log
+rest_log="/tmp/rest.log"
 rm -f $rest_log
 wget "http://localhost:8080/airsonic/rest/createUser.view?u=admin&p=admin&adminRole=Yes&username=$user&password=a&email=$YNH_MAIL&ldapAuthenticated=Yes&v=$VERSION&c=myapp" > $rest_log 2>&1
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&adminRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
