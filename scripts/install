@@ -126,7 +126,7 @@ wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&stream
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&jukebowRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
 wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&jukebowRole=Yes&username=$user&v=$VERSION&c=myapp" >> $rest_log -O /tmp/5
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&downloadRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&downloadRole=Yes&username=$user&&v=$VERSIONc=myapp" >> $rest_log -O /tmp/6
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&downloadRole=Yes&username=$user&v=$VERSION&c=myapp" >> $rest_log -O /tmp/6
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&uploadRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
 wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&uploadRole=Yes&username=$user&v=$VERSION&c=myapp" >> $rest_log -O /tmp/7
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&covertArtRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
