@@ -72,7 +72,9 @@ final_path="/var/lib/tomcat8/webapps/"
 sudo service tomcat8 stop
 echo "Extracting to $final_path..."
 # Get airsonic war file
-sudo wget https://github.com/airsonic/airsonic/releases/download/v$appversion/airsonic.war -q -O ${final_path}airsonic.war
+# INSTALL DEBUG
+sudo cp /tmp/airsonic.war ${final_path}airsonic.war
+#sudo wget https://github.com/airsonic/airsonic/releases/download/v$appversion/airsonic.war -q -O ${final_path}airsonic.war
 #sudo wget https://airsonic.org/release/airsonic-v$appversion.war -q -O ${final_path}airsonic.war
 
 # Create needed directories and link binaries
@@ -112,28 +114,29 @@ sudo chown tomcat8:tomcat8 /var/airsonic/airsonic.properties
 data_path=/home/yunohost.app/airsonic
 # VERSION seems to be rest api version
 VERSION="1.15.0"
-
-wget "http://localhost:8080/airsonic/rest/createUser.view?u=admin&p=admin&adminRole=Yes&username=$user&password=a&email=$YNH_MAIL&ldapAuthenticated=Yes&v=$VERSION&c=myapp" > /dev/null 2>&1
+rest_log = /tmp/rest.log
+rm -f $rest_log
+wget "http://localhost:8080/airsonic/rest/createUser.view?u=admin&p=admin&adminRole=Yes&username=$user&password=a&email=$YNH_MAIL&ldapAuthenticated=Yes&v=$VERSION&c=myapp" > $rest_log 2>&1
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&adminRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&adminRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&adminRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&settingsRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&settingsRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&settingsRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&streamRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&streamRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&streamRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&jukebowRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&jukebowRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&jukebowRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&downloadRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&downloadRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&downloadRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&uploadRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&uploadRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&uploadRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&covertArtRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&covertArtRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&covertArtRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&commentRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&commentRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&commentRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&podcastArtRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&podcastArtRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&podcastArtRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&shareArtRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&shareArtRole=Yes&username=$user&c=myapp" > /dev/null 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&shareArtRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
 
 
 # Reload Nginx and regenerate SSOwat conf
