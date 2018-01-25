@@ -89,7 +89,7 @@ sudo chown tomcat8:tomcat8 -R /var/airsonic
 sudo service tomcat8 start
 
 echo "Waiting for 60s for jar deployment..."
-sleep 60
+sleep 90
 
 # Set nginx reverse proxy
 #if [[ "$path" == "/" ]] ; then
@@ -116,27 +116,27 @@ data_path=/home/yunohost.app/airsonic
 VERSION="1.15.0"
 rest_log="/tmp/rest.log"
 rm -f $rest_log
-wget "http://localhost:8080/airsonic/rest/createUser.view?u=admin&p=admin&adminRole=Yes&username=$user&password=a&email=$YNH_MAIL&ldapAuthenticated=Yes&v=$VERSION&c=myapp" > $rest_log 2>&1
+wget "http://localhost:8080/airsonic/rest/createUser.view?u=admin&p=admin&adminRole=Yes&username=$user&password=a&email=$YNH_MAIL&ldapAuthenticated=Yes&v=$VERSION&c=myapp" > $rest_log -O /tmp/1
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&adminRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&adminRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&adminRole=Yes&username=$user&c=myapp" >> $rest_log -O /tmp/2
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&settingsRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&settingsRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&settingsRole=Yes&username=$user&c=myapp" >> $rest_log -O /tmp/3
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&streamRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&streamRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&streamRole=Yes&username=$user&c=myapp" >> $rest_log -O /tmp/4
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&jukebowRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&jukebowRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&jukebowRole=Yes&username=$user&c=myapp" >> $rest_log -O /tmp/5
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&downloadRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&downloadRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&downloadRole=Yes&username=$user&c=myapp" >> $rest_log -O /tmp/6
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&uploadRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&uploadRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&uploadRole=Yes&username=$user&c=myapp" >> $rest_log -O /tmp/7
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&covertArtRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&covertArtRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&covertArtRole=Yes&username=$user&c=myapp" >> $rest_log -O /tmp/8
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&commentRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&commentRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&commentRole=Yes&username=$user&c=myapp" >> $rest_log -O /tmp/9
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&podcastArtRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&podcastArtRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&podcastArtRole=Yes&username=$user&c=myapp" >> $rest_log -O /tmp/10
 #wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&shareArtRole=Yes&username=$user&v=$VERSION&c=myapp" > /dev/null 2>&1
-wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&shareArtRole=Yes&username=$user&c=myapp" >> $rest_log 2>&1
+wget "http://localhost:8080/airsonic/rest/updateUser.view?u=admin&p=admin&shareArtRole=Yes&username=$user&c=myapp" >> $rest_log -O /tmp/11
 
 
 # Reload Nginx and regenerate SSOwat conf
