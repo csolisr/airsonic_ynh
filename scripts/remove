@@ -4,7 +4,7 @@
 set -u
 
 # Retrieve app settings
-domain=$(ynh_app_setting_get "$app" domain)
+domain=$(ynh_app_setting_get $app domain)
 
 sudo rm /etc/nginx/conf.d/$domain.d/airsonic.conf
 sudo rm /etc/default/airsonic
